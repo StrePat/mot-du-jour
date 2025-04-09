@@ -1,0 +1,100 @@
+import React, { useState, useEffect } from 'react';
+import { Share2 } from 'lucide-react';
+import { Word, WordState } from '../types';
+import { getRandomWord, formatDate, getShareText } from '../utils/wordUtils';
+
+export default function WordOfTheDay() {
+  const [state, setState] = useState<WordState>({
+    currentWord: null,
+    isLoading: true
+  });
+
+  const generateNewWord = () => {
+    setState(prev => ({ ...prev, isLoading: true }));
+    const word = getRandomWord();
+    const newWord: Word = {
+      ...word,
+      date: formatDate(new Date())
+    };
+    setState({ currentWord: newWord, isLoading: false });
+  };
+
+  useEffect(() => {
+    generateNewWord();
+    
+    // Planifier le changement quotidien à 8h00 UTC+1
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(8, 0, 0, 0);
+    
+    const timeUntilNextUpdate = tomorrow.getTime() - now.getTime();
+    
+    const timer = setInterval(generateNewWord, 24 * 60 * 60 * 1000);
+    const initialTimer = setTimeout(generateNewWord, timeUntilNextUpdate);
+
+    return () => {
+      clearInterval(timer);
+      clearTimeout(initialTimer);
+    };
+  }, []);
+
+  const handleShare = () => {
+    if (!state.currentWord) return;
+    
+    const shareText = getShareText(
+      state.currentWord.word,
+      state.currentWord.definition,
+      window.location.href
+    );
+    
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+    window.open(twitterUrl, '_blank');
+  };
+
+  if (state.isLoading || !state.currentWord) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-white text-gray-900 flex flex-col">
+      <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center">
+        <div className="max-w-2xl w-full bg-white rounded-lg shadow-lg p-8">
+          <p className="text-sm text-gray-500 mb-8 text-center">{state.currentWord.date}</p>
+          
+          <h1 className="text-4xl font-bold mb-4 text-center">{state.currentWord.word}</h1>
+          
+          <p className="text-xl text-gray-700 mb-8 text-center leading-relaxed">
+            {state.currentWord.definition}
+          </p>
+          
+          <div className="flex justify-center space-x-4">
+            <button
+              onClick={generateNewWord}
+              className="bg-gray-900 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+            >
+              Actualiser
+            </button>
+            
+            <button
+              onClick={handleShare}
+              className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors flex items-center"
+            >
+              <Share2 className="w-4 h-4 mr-2" />
+              Partager
+            </button>
+          </div>
+        </div>
+      </main>
+
+      {/* Espace réservé pour Google AdSense */}
+      <div className="w-full bg-gray-100 p-4 text-center text-gray-500">
+        Espace publicitaire
+      </div>
+    </div>
+  );
+}
