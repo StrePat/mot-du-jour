@@ -4,11 +4,21 @@ export async function getRandomWord(): Promise<Word> {
   try {
     const wordResponse = await fetch('https://random-word-api.herokuapp.com/word?number=1');
     const [word] = await wordResponse.json();
+
     const dictResponse = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
     const dictData = await dictResponse.json();
+
     if (dictData.title === "No Definitions Found") {
-      return { word, definition: "Définition non disponible pour ce mot." };
+      // Liste de secours pour les mots courants
+      const backupWords = [
+        { word: "Happy", definition: "Feeling or showing pleasure or contentment." },
+        { word: "Sad", definition: "Feeling or showing sorrow; unhappy." },
+        { word: "Run", definition: "Move at a speed faster than a walk." }
+      ];
+      const randomBackup = backupWords[Math.floor(Math.random() * backupWords.length)];
+      return randomBackup;
     }
+
     const definition = dictData[0].meanings[0].definitions[0].definition;
     return { word, definition };
   } catch (error) {
