@@ -5,15 +5,16 @@ export async function getRandomWord(): Promise<Word> {
     const wordResponse = await fetch('https://random-word-api.herokuapp.com/word?number=1');
     const [word] = await wordResponse.json();
 
-    const dictResponse = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+    const dictResponse = await fetch(`[invalid url, do not cite]);
     const dictData = await dictResponse.json();
 
     if (dictData.title === "No Definitions Found") {
-      // Liste de secours pour les mots courants
       const backupWords = [
         { word: "Happy", definition: "Feeling or showing pleasure or contentment." },
         { word: "Sad", definition: "Feeling or showing sorrow; unhappy." },
-        { word: "Run", definition: "Move at a speed faster than a walk." }
+        { word: "Run", definition: "Move at a speed faster than a walk." },
+        { word: "Dream", definition: "A series of thoughts, images, and sensations occurring in a person's mind during sleep." },
+        { word: "Hope", definition: "A feeling of expectation and desire for a certain thing to happen." }
       ];
       const randomBackup = backupWords[Math.floor(Math.random() * backupWords.length)];
       return randomBackup;
