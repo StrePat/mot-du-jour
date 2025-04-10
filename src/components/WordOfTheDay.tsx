@@ -62,8 +62,18 @@ export default function WordOfTheDay() {
           </div>
         </div>
       </main>
-      <div className="w-full bg-gray-100 p-4 text-center text-gray-500">
-        Espace publicitaire
+
+      {/* Google AdSense */}
+      <div className="w-full bg-gray-100 p-4 text-center">
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-1489489505901621" // Ton ID AdSense
+          data-ad-slot="XXXXXXXXXX" // À remplacer par ton ID d’unité d’annonce une fois créé
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+        <script dangerouslySetInnerHTML={{ __html: '(adsbygoogle = window.adsbygoogle || []).push({});' }} />
       </div>
     </div>
   );

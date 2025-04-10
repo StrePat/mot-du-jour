@@ -1,7 +1,7 @@
 export interface Word {
   word: string;
   definition: string;
-  date: string;
+  date?: string;
 }
 
 export interface WordState {
