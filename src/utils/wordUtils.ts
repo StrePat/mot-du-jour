@@ -5,7 +5,7 @@ export async function getRandomWord(): Promise<Word> {
     const wordResponse = await fetch('https://random-word-api.herokuapp.com/word?number=1');
     const [word] = await wordResponse.json();
 
-    const dictResponse = await fetch(`[invalid url, do not cite]);
+    const dictResponse = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
     const dictData = await dictResponse.json();
 
     if (dictData.title === "No Definitions Found") {
@@ -38,5 +38,5 @@ export function formatDate(date: Date): string {
 }
 
 export function getShareText(word: string, definition: string, url: string): string {
-  return `Mot du jour : ${word} – ${definition}. Découvre plus sur ${url}`;
+  return `Mot du jour : ${word} - ${definition}. Decouvre plus sur ${url}`;
 }
