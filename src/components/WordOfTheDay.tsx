@@ -41,10 +41,10 @@ export default function WordOfTheDay() {
   return (
     <div className="min-h-screen bg-white text-gray-900 flex flex-col items-center justify-center">
       <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center">
-        <div className="max-w-2xl w-full bg-white rounded-lg shadow-lg p-8 flex flex-col items-center">
+        <div className="max-w-md bg-white rounded-lg shadow-lg p-8 flex flex-col items-center">
           <p className="text-sm text-gray-500 mb-8 text-center">{state.currentWord.date}</p>
           <h1 className="text-4xl font-bold mb-4 text-center">{state.currentWord.word}</h1>
-          <p className="text-xl text-gray-700 mb-8 text-center leading-relaxed">{state.currentWord.definition}</p>
+          <p className="text-xl text-gray-700 mb-8 leading-relaxed text-center">{state.currentWord.definition}</p>
           <div className="flex justify-center space-x-4">
             <button
               onClick={generateNewWord}
