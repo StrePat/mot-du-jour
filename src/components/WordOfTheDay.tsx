@@ -39,9 +39,9 @@ export default function WordOfTheDay() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 flex flex-col">
+    <div className="min-h-screen bg-white text-gray-900 flex flex-col items-center justify-center">
       <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center">
-        <div className="max-w-2xl w-full bg-white rounded-lg shadow-lg p-8">
+        <div className="max-w-2xl w-full bg-white rounded-lg shadow-lg p-8 flex flex-col items-center">
           <p className="text-sm text-gray-500 mb-8 text-center">{state.currentWord.date}</p>
           <h1 className="text-4xl font-bold mb-4 text-center">{state.currentWord.word}</h1>
           <p className="text-xl text-gray-700 mb-8 text-center leading-relaxed">{state.currentWord.definition}</p>
@@ -64,12 +64,12 @@ export default function WordOfTheDay() {
       </main>
 
       {/* Google AdSense */}
-      <div className="w-full bg-gray-100 p-4 text-center">
+      <div className="w-full bg-gray-100 p-4 flex justify-center">
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
-          data-ad-client="ca-pub-1489489505901621" // Ton ID AdSense
-          data-ad-slot="XXXXXXXXXX" // À remplacer par ton ID d’unité d’annonce une fois créé
+          data-ad-client="ca-pub-1489489505901621"
+          data-ad-slot="XXXXXXXXXX"
           data-ad-format="auto"
           data-full-width-responsive="true"
         />
