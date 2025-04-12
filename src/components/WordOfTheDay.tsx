@@ -42,10 +42,10 @@ export default function WordOfTheDay() {
     <div className="min-h-screen bg-white text-gray-900 flex flex-col items-center justify-center">
       <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center">
         <div className="max-w-md bg-white rounded-lg shadow-lg p-8 flex flex-col items-center">
-          <p className="text-sm text-gray-500 mb-8 text-center">{state.currentWord.date}</p>
-          <h1 className="text-4xl font-bold mb-4 text-center">{state.currentWord.word}</h1>
-          <p className="text-xl text-gray-700 mb-8 leading-relaxed text-center">{state.currentWord.definition}</p>
-          <div className="flex justify-center space-x-4">
+          <p style={{ textAlign: 'center', width: '100%' }} className="text-sm text-gray-500 mb-8">{state.currentWord.date}</p>
+          <h1 style={{ textAlign: 'center', width: '100%' }} className="text-4xl font-bold mb-4">{state.currentWord.word}</h1>
+          <p style={{ textAlign: 'center', width: '100%' }} className="text-xl text-gray-700 mb-8 leading-relaxed">{state.currentWord.definition}</p>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }} className="space-x-4">
             <button
               onClick={generateNewWord}
               className="bg-gray-900 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors"
